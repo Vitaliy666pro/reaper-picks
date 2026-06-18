@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Прогноз на кард</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root{
+    --bg: var(--tg-theme-bg-color, #0f0f0f);
+    --card: var(--tg-theme-secondary-bg-color, #1c1c1e);
+    --text: var(--tg-theme-text-color, #fff);
+    --hint: var(--tg-theme-hint-color, #8a8a8e);
+    --accent: var(--tg-theme-button-color, #2ea043);
+    --on-accent: var(--tg-theme-button-text-color, #fff);
+    --red:#e24b4a; --blue:#378add;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+    /* horizontal safe-margins: keep sliders away from iOS edge-swipe */
+    padding:12px 16px calc(96px + env(safe-area-inset-bottom));}
+  h1{font-size:18px;font-weight:500;margin:4px 0 2px}
+  .sub{color:var(--hint);font-size:13px;margin:0 0 14px}
+  .bout{background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+  .wc{color:var(--hint);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+  .pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+  .opt{border:1.5px solid transparent;border-radius:10px;padding:9px 8px;text-align:center;
+    background:rgba(127,127,127,.12);cursor:pointer;font-size:14px;line-height:1.25;user-select:none}
+  .opt .rec{display:block;color:var(--hint);font-size:11px;margin-top:2px}
+  .opt.sel-red{border-color:var(--red);background:rgba(226,75,74,.16)}
+  .opt.sel-blue{border-color:var(--blue);background:rgba(55,138,221,.16)}
+  .conf{display:flex;align-items:center;gap:10px}
+  .conf input[type=range]{flex:1;accent-color:var(--accent)}
+  .conf .val{min-width:42px;text-align:right;font-variant-numeric:tabular-nums;font-size:14px}
+  .conf .lbl{color:var(--hint);font-size:12px;min-width:64px}
+  .hintbtn{background:none;border:none;color:var(--hint);font-size:12px;padding:6px 0 0;cursor:pointer}
+  #submit{position:fixed;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom));
+    background:var(--accent);color:var(--on-accent);border:none;border-radius:12px;
+    padding:14px;font-size:16px;font-weight:500;cursor:pointer}
+  #submit:disabled{opacity:.45}
+</style>
+</head>
+<body>
+<h1 id="title">Прогноз на кард</h1>
+<p class="sub" id="sub">Выбери победителя и сдвинь слайдер уверенности</p>
+<div id="list"></div>
+<button id="submit" disabled>Сначала выбери победителей</button>
+
+<script>
+const tg = window.Telegram && window.Telegram.WebApp;
+
+const DEMO = {name:"UFC 999 (demo)",date:"2026-04-04",bouts:[
+  {id:"topuria_oliveira",order:1,weight_class:"Lightweight",red:{name:"Ilia Topuria"},blue:{name:"Charles Oliveira"},model_prob_red:0.71}
+]};
+
+const state = {};
+
+function favHint(b){
+  const p = b.model_prob_red;
+  if (p == null) return "";
+  const side = p >= .5 ? "red" : "blue";
+  const who = side === "red" ? b.red.name : b.blue.name;
+  return "🤖 модель: " + who.split(" ").pop() + " " + Math.round(Math.max(p,1-p)*100) + "%";
+}
+
+function render(card){
+  document.getElementById("title").textContent = card.name;
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  card.bouts.sort((a,b)=>a.order-b.order).forEach(b=>{
+    state[b.id] = {winner:null, conf:65};
+    const el = document.createElement("div");
+    el.className = "bout";
+    el.innerHTML =
+      '<div class="wc">'+(b.weight_class||"")+'</div>'+
+      '<div class="pick">'+
+        '<div class="opt" data-side="red">'+b.red.name+'</div>'+
+        '<div class="opt" data-side="blue">'+b.blue.name+'</div>'+
+      '</div>'+
+      '<div class="conf">'+
+        '<span class="lbl">Уверен на</span>'+
+        '<input type="range" min="50" max="95" step="5" value="65">'+
+        '<span class="val">65%</span>'+
+      '</div>'+
+      '<button class="hintbtn">показать прогноз модели</button>';
+    const opts = el.querySelectorAll(".opt");
+    opts.forEach(o=>o.addEventListener("click",()=>{
+      state[b.id].winner = o.dataset.side;
+      opts.forEach(x=>x.classList.remove("sel-red","sel-blue"));
+      o.classList.add(o.dataset.side==="red"?"sel-red":"sel-blue");
+      refresh();
+    }));
+    const range = el.querySelector("input"), val = el.querySelector(".val");
+    range.addEventListener("input",()=>{state[b.id].conf=+range.value; val.textContent=range.value+"%";});
+    const hb = el.querySelector(".hintbtn");
+    hb.addEventListener("click",()=>{hb.textContent = favHint(b); hb.disabled = true;});
+    list.appendChild(el);
+  });
+}
+
+function refresh(){
+  const ready = Object.values(state).every(s=>s.winner);
+  const btn = document.getElementById("submit");
+  btn.disabled = !ready;
+  btn.textContent = ready ? "Отправить прогноз" : "Сначала выбери победителей";
+}
+
+document.getElementById("submit").addEventListener("click",()=>{
+  const payload = Object.keys(state).map(id=>({b:id,w:state[id].winner,c:state[id].conf}));
+  const json = JSON.stringify(payload);
+  if (tg && tg.sendData){ tg.sendData(json); }      // -> web_app_data on the bot
+  else { alert("Превью вне Telegram. Payload:\n"+json); }
+});
+
+async function boot(){
+  if (tg){ tg.ready(); tg.expand();
+    if (tg.disableVerticalSwipes) tg.disableVerticalSwipes();      // 7.7+, scroll vs close
+    if (tg.enableClosingConfirmation) tg.enableClosingConfirmation();
+  }
+  let card;
+  try { card = await (await fetch("./card.json",{cache:"no-store"})).json(); }
+  catch(e){ card = DEMO; }                                          // local-preview fallback
+  document.getElementById("sub").textContent =
+    card.name + " · " + card.date + " · main card";
+  render(card); refresh();
+}
+boot();
+</script>
+</body>
+</html>

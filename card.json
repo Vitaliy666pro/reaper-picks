@@ -1,0 +1,26 @@
+{
+  "name": "UFC 999",
+  "date": "2026-04-04",
+  "bouts": [
+    {"id": "topuria_oliveira", "order": 1, "weight_class": "Lightweight",
+     "red": {"name": "Ilia Topuria", "record": "16-0-0"},
+     "blue": {"name": "Charles Oliveira", "record": "35-10-0"},
+     "model_prob_red": 0.71},
+    {"id": "pereira_ankalaev", "order": 2, "weight_class": "Light Heavyweight",
+     "red": {"name": "Alex Pereira", "record": "12-3-0"},
+     "blue": {"name": "Magomed Ankalaev", "record": "20-1-1"},
+     "model_prob_red": 0.46},
+    {"id": "o'malley_dvalishvili", "order": 3, "weight_class": "Bantamweight",
+     "red": {"name": "Sean O'Malley", "record": "18-2-0"},
+     "blue": {"name": "Merab Dvalishvili", "record": "18-4-0"},
+     "model_prob_red": 0.38},
+    {"id": "weili_suarez", "order": 4, "weight_class": "Women's Strawweight",
+     "red": {"name": "Zhang Weili", "record": "25-3-0"},
+     "blue": {"name": "Tatiana Suarez", "record": "10-0-0"},
+     "model_prob_red": 0.55},
+    {"id": "strickland_imavov", "order": 5, "weight_class": "Middleweight",
+     "red": {"name": "Sean Strickland", "record": "29-6-0"},
+     "blue": {"name": "Nassourdine Imavov", "record": "15-4-0"},
+     "model_prob_red": 0.52}
+  ]
+}
