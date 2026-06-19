@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Фантики — play money</title>
+<title>Play money</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   :root{
@@ -50,9 +50,9 @@
 </style>
 </head>
 <body>
-<h1>Фантики</h1>
-<p class="sub" id="sub">Play money · bet any bouts · фантики, not $</p>
-<div class="bankbar" id="bankbar">Bankroll 1000 · staked 0 · cash 1000</div>
+<h1>Play money</h1>
+<p class="sub" id="sub">Play money · bet any bouts · not real $</p>
+<div class="bankbar" id="bankbar">Bankroll 100 · staked 0 · cash 100</div>
 <div id="list"></div>
 
 <div id="bar">
@@ -62,13 +62,13 @@
   </div>
   <div class="row"><span class="lbl">if all win</span><span class="big" id="best">—</span></div>
   <div class="row"><span class="lbl">if all lose</span><span id="worst">—</span></div>
-  <div id="note">Vig is in the odds — most bets are −EV. Live value after fights: /fantiki in the bot. Фантики, игра.</div>
+  <div id="note">Vig is in the odds — most bets are −EV. Live value after fights: /playmoney in the bot. Play money, a game.</div>
   <button id="submit" disabled>Pick fighters &amp; stakes</button>
 </div>
 
 <script>
 const tg = window.Telegram && window.Telegram.WebApp;
-const START = 1000, MIN_STAKE = 10;
+const START = 100, MIN_STAKE = 10;
 const DEMO = {name:"Demo",date:"",locked_ids:[],bouts:[
   {id:"a_b_1",order:1,weight_class:"Lightweight",main_card:true,model_prob_red:0.6,
    red:{name:"Red One",odds:1.8},blue:{name:"Blue One",odds:2.0}}]};
@@ -80,7 +80,7 @@ function odTxt(f){ return (f.odds!=null) ? '<span class="od">'+(+f.odds).toFixed
 
 function render(card){
   CARD = card; LOCKED = new Set(card.locked_ids || []);
-  document.getElementById("sub").textContent = card.name + (card.date? " · "+card.date : "") + " · фантики, not $";
+  document.getElementById("sub").textContent = card.name + (card.date? " · "+card.date : "") + " · play money, not $";
   const list = document.getElementById("list"); list.innerHTML = "";
   const bouts = card.bouts.slice().sort((a,b)=>a.order-b.order);
   let lastSec = null;
@@ -100,7 +100,7 @@ function render(card){
         '<div class="opt" data-side="blue">'+b.blue.name+odTxt(b.blue)+'</div>'+
       '</div>'+
       '<div class="stakerow" style="display:none"><span class="lbl">stake</span>'+
-        '<input type="number" min="'+MIN_STAKE+'" step="10" value="100" inputmode="numeric">'+
+        '<input type="number" min="'+MIN_STAKE+'" step="10" value="20" inputmode="numeric">'+
         '<span class="mh">'+mh+'</span></div>';
     list.appendChild(el);
     if (locked) return;   // no listeners — bout frozen
