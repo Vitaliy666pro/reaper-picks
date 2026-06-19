@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Фантики — play money</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root{
+    --bg: var(--tg-theme-bg-color, #0f0f0f);
+    --card: var(--tg-theme-secondary-bg-color, #1c1c1e);
+    --text: var(--tg-theme-text-color, #fff);
+    --hint: var(--tg-theme-hint-color, #8a8a8e);
+    --accent: var(--tg-theme-button-color, #2ea043);
+    --on-accent: var(--tg-theme-button-text-color, #fff);
+    --red:#e24b4a; --blue:#378add;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+    padding:12px 16px calc(176px + env(safe-area-inset-bottom));}
+  h1{font-size:18px;font-weight:500;margin:4px 0 2px}
+  .sub{color:var(--hint);font-size:13px;margin:0 0 10px}
+  .bankbar{background:var(--card);border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:12px}
+  .sec{color:var(--hint);font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 6px}
+  .bout{background:var(--card);border-radius:14px;padding:10px 12px;margin-bottom:10px}
+  .bout.locked{opacity:.55}
+  .wc{color:var(--hint);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+  .pick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .opt{border:1.5px solid transparent;border-radius:10px;padding:9px 8px;text-align:center;
+    background:rgba(127,127,127,.12);cursor:pointer;font-size:14px;line-height:1.25;user-select:none}
+  .opt .od{display:block;color:var(--hint);font-size:12px;margin-top:2px}
+  .opt.sel-red{border-color:var(--red);background:rgba(226,75,74,.16)}
+  .opt.sel-blue{border-color:var(--blue);background:rgba(55,138,221,.16)}
+  .stakerow{align-items:center;gap:10px;margin-top:10px}
+  .stakerow .lbl{color:var(--hint);font-size:13px}
+  .stakerow input{width:90px;background:var(--bg);color:var(--text);
+    border:1px solid rgba(127,127,127,.3);border-radius:9px;padding:7px 9px;font-size:15px}
+  .stakerow .mh{color:var(--hint);font-size:12px;margin-left:auto}
+  #bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);
+    border-top:1px solid rgba(127,127,127,.25);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));}
+  #bar .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  #bar .meta,#bar .lbl{color:var(--hint);font-size:13px}
+  #bar .big{font-size:18px;font-weight:600}
+  #note{color:var(--hint);font-size:11px;line-height:1.5;margin:6px 0 8px}
+  #submit{width:100%;background:var(--accent);color:var(--on-accent);border:none;border-radius:12px;
+    padding:13px;font-size:16px;font-weight:500;cursor:pointer}
+  #submit:disabled{opacity:.45}
+</style>
+</head>
+<body>
+<h1>Фантики</h1>
+<p class="sub" id="sub">Play money · bet any bouts · фантики, not $</p>
+<div class="bankbar" id="bankbar">Bankroll 1000 · staked 0 · cash 1000</div>
+<div id="list"></div>
+
+<div id="bar">
+  <div class="row">
+    <span class="meta"><span id="legs">0</span> bets · staked <span id="staked">0</span></span>
+    <span class="meta" id="evline">🤖 —</span>
+  </div>
+  <div class="row"><span class="lbl">if all win</span><span class="big" id="best">—</span></div>
+  <div class="row"><span class="lbl">if all lose</span><span id="worst">—</span></div>
+  <div id="note">Vig is in the odds — most bets are −EV. Live value after fights: /fantiki in the bot. Фантики, игра.</div>
+  <button id="submit" disabled>Pick fighters &amp; stakes</button>
+</div>
+
+<script>
+const tg = window.Telegram && window.Telegram.WebApp;
+const START = 1000, MIN_STAKE = 10;
+const DEMO = {name:"Demo",date:"",locked_ids:[],bouts:[
+  {id:"a_b_1",order:1,weight_class:"Lightweight",main_card:true,model_prob_red:0.6,
+   red:{name:"Red One",odds:1.8},blue:{name:"Blue One",odds:2.0}}]};
+const state = {};
+let CARD = null, LOCKED = new Set();
+
+function pchosen(b, side){ const p=b.model_prob_red; return (p==null)?null:(side==="red"?p:1-p); }
+function odTxt(f){ return (f.odds!=null) ? '<span class="od">'+(+f.odds).toFixed(2)+'</span>' : '<span class="od">no odds</span>'; }
+
+function render(card){
+  CARD = card; LOCKED = new Set(card.locked_ids || []);
+  document.getElementById("sub").textContent = card.name + (card.date? " · "+card.date : "") + " · фантики, not $";
+  const list = document.getElementById("list"); list.innerHTML = "";
+  const bouts = card.bouts.slice().sort((a,b)=>a.order-b.order);
+  let lastSec = null;
+  bouts.forEach(b=>{
+    state[b.id] = {side:null, stake:100};
+    const sec = (b.main_card===false) ? "Prelims" : "Main card";
+    if (sec!==lastSec){ lastSec=sec; const h=document.createElement("div"); h.className="sec"; h.textContent=sec; list.appendChild(h); }
+    const locked = LOCKED.has(b.id);
+    const mh = (b.model_prob_red!=null)
+      ? ('🤖 '+(b.model_prob_red>=.5?b.red.name:b.blue.name).split(" ").pop()+' '+Math.round(Math.max(b.model_prob_red,1-b.model_prob_red)*100)+'%')
+      : '';
+    const el = document.createElement("div"); el.className = "bout"+(locked?" locked":"");
+    el.innerHTML =
+      '<div class="wc">'+(b.weight_class||"")+(locked?" · 🔒 started":"")+'</div>'+
+      '<div class="pick">'+
+        '<div class="opt" data-side="red">'+b.red.name+odTxt(b.red)+'</div>'+
+        '<div class="opt" data-side="blue">'+b.blue.name+odTxt(b.blue)+'</div>'+
+      '</div>'+
+      '<div class="stakerow" style="display:none"><span class="lbl">stake</span>'+
+        '<input type="number" min="'+MIN_STAKE+'" step="10" value="100" inputmode="numeric">'+
+        '<span class="mh">'+mh+'</span></div>';
+    list.appendChild(el);
+    if (locked) return;   // no listeners — bout frozen
+    const opts = el.querySelectorAll(".opt"), stakerow = el.querySelector(".stakerow"), si = el.querySelector("input");
+    opts.forEach(o=>o.addEventListener("click",()=>{
+      const side = o.dataset.side;
+      state[b.id].side = (state[b.id].side===side) ? null : side;
+      opts.forEach(x=>x.classList.remove("sel-red","sel-blue"));
+      if (state[b.id].side){ o.classList.add(side==="red"?"sel-red":"sel-blue"); stakerow.style.display="flex"; state[b.id].stake = +si.value||0; }
+      else { stakerow.style.display="none"; }
+      calc();
+    }));
+    si.addEventListener("input",()=>{ state[b.id].stake = +si.value||0; calc(); });
+  });
+}
+
+function legBets(){
+  const bets=[];
+  CARD.bouts.forEach(b=>{
+    const s=state[b.id];
+    if (!s || !s.side || LOCKED.has(b.id)) return;
+    const stake=Math.max(0, Math.round(s.stake||0));
+    const f = s.side==="red"?b.red:b.blue;
+    if (stake>=MIN_STAKE && f.odds!=null && +f.odds>1) bets.push({b:b.id, w:s.side, s:stake, o:+f.odds, p:pchosen(b,s.side)});
+  });
+  return bets;
+}
+
+function calc(){
+  const bets = legBets();
+  let staked=0, win=0, ev=0;
+  bets.forEach(x=>{ staked+=x.s; win+=x.s*x.o; ev += (x.p!=null)? x.p*x.s*x.o : x.s; });
+  const cash = START - staked;
+  document.getElementById("bankbar").textContent = "Bankroll "+START+" · staked "+staked+" · cash "+cash;
+  document.getElementById("legs").textContent = bets.length;
+  document.getElementById("staked").textContent = staked;
+  document.getElementById("best").textContent = bets.length ? Math.round(cash+win) : "—";
+  document.getElementById("worst").textContent = bets.length ? Math.round(cash) : "—";
+  const evTotal = cash+ev, edge = evTotal-START;
+  document.getElementById("evline").textContent = bets.length
+    ? ("🤖 model ~"+Math.round(evTotal)+" ("+(edge>=0?"+":"")+(edge/START*100).toFixed(1)+"%)") : "🤖 —";
+  const over = staked>START, btn = document.getElementById("submit");
+  btn.disabled = !bets.length || over;
+  btn.textContent = over ? ("over bankroll by "+(staked-START))
+                   : (bets.length ? ("Place "+bets.length+" bet"+(bets.length>1?"s":"")) : "Pick fighters & stakes");
+}
+
+document.getElementById("submit").addEventListener("click",()=>{
+  const bets = legBets().map(x=>({b:x.b, w:x.w, s:x.s}));
+  if (!bets.length) return;
+  const payload = JSON.stringify({mode:"fantiki", bets:bets});
+  if (tg && tg.sendData){ if (tg.disableClosingConfirmation) tg.disableClosingConfirmation(); tg.sendData(payload); }
+  else { alert("Preview outside Telegram. Payload:\n"+payload); }
+});
+
+async function boot(){
+  if (tg){ tg.ready(); tg.expand();
+    if (tg.disableVerticalSwipes) tg.disableVerticalSwipes();
+    if (tg.enableClosingConfirmation) tg.enableClosingConfirmation(); }
+  let card;
+  try { card = await (await fetch("./fantiki_card.json",{cache:"no-store"})).json(); }
+  catch(e){ card = DEMO; }
+  render(card); calc();
+}
+boot();
+</script>
+</body>
+</html>
