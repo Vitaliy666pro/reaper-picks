@@ -1,0 +1,174 @@
+{
+  "name": "UFC Fight Night: Kape vs. Horiguchi",
+  "date": "2026-06-20",
+  "bouts": [
+    {
+      "id": "kape_horiguchi_1",
+      "order": 1,
+      "weight_class": "Flyweight",
+      "main_card": true,
+      "red": {
+        "name": "Manel Kape",
+        "odds": 1.63
+      },
+      "blue": {
+        "name": "Kyoji Horiguchi",
+        "odds": 2.328
+      }
+    },
+    {
+      "id": "cutelaba_stirling_2",
+      "order": 2,
+      "weight_class": "Light Heavyweight",
+      "main_card": true,
+      "red": {
+        "name": "Ion Cutelaba",
+        "odds": 3.507
+      },
+      "blue": {
+        "name": "Navajo Stirling",
+        "odds": 1.316
+      }
+    },
+    {
+      "id": "amil_rodriguez_3",
+      "order": 3,
+      "weight_class": "Featherweight",
+      "main_card": true,
+      "red": {
+        "name": "Hyder Amil",
+        "odds": 2.514
+      },
+      "blue": {
+        "name": "Christian Rodriguez",
+        "odds": 1.547
+      }
+    },
+    {
+      "id": "baghdasaryan_magomedov_4",
+      "order": 4,
+      "weight_class": "Featherweight",
+      "main_card": true,
+      "red": {
+        "name": "Melsik Baghdasaryan",
+        "odds": 3.497
+      },
+      "blue": {
+        "name": "Murtazali Magomedov",
+        "odds": 1.32
+      }
+    },
+    {
+      "id": "oliveira_fili_5",
+      "order": 5,
+      "weight_class": "Bantamweight",
+      "main_card": true,
+      "red": {
+        "name": "Vinicius Oliveira",
+        "odds": 1.335
+      },
+      "blue": {
+        "name": "Andre Fili",
+        "odds": 3.425
+      }
+    },
+    {
+      "id": "lima_borjas_6",
+      "order": 6,
+      "weight_class": "Flyweight",
+      "main_card": false,
+      "red": {
+        "name": "Andre Lima",
+        "odds": 1.155
+      },
+      "blue": {
+        "name": "Kevin Borjas",
+        "odds": 5.563
+      }
+    },
+    {
+      "id": "mesquita_mullins_7",
+      "order": 7,
+      "weight_class": "Women's Bantamweight",
+      "main_card": false,
+      "red": {
+        "name": "Bia Mesquita",
+        "odds": 1.166
+      },
+      "blue": {
+        "name": "Melissa Mullins",
+        "odds": 5.293
+      }
+    },
+    {
+      "id": "nascimento_raposo_8",
+      "order": 8,
+      "weight_class": "Catch Weight",
+      "main_card": false,
+      "red": {
+        "name": "Allan Nascimento",
+        "odds": 1.511
+      },
+      "blue": {
+        "name": "Mitch Raposo",
+        "odds": 2.619
+      }
+    },
+    {
+      "id": "bolanos_jr._9",
+      "order": 9,
+      "weight_class": "Bantamweight",
+      "main_card": false,
+      "red": {
+        "name": "Gaston Bolanos",
+        "odds": 4.25
+      },
+      "blue": {
+        "name": "Michael Aswell Jr.",
+        "odds": 1.24
+      }
+    },
+    {
+      "id": "shahbazyan_chokheli_10",
+      "order": 10,
+      "weight_class": "",
+      "main_card": false,
+      "red": {
+        "name": "Leon Shahbazyan",
+        "odds": 3.912
+      },
+      "blue": {
+        "name": "Levan Chokheli",
+        "odds": 1.271
+      }
+    },
+    {
+      "id": "rosa_santos_11",
+      "order": 11,
+      "weight_class": "Women's Bantamweight",
+      "main_card": false,
+      "red": {
+        "name": "Karol Rosa",
+        "odds": 1.806
+      },
+      "blue": {
+        "name": "Luana Santos",
+        "odds": 2.028
+      }
+    },
+    {
+      "id": "collins_tanzilovi_12",
+      "order": 12,
+      "weight_class": "",
+      "main_card": false,
+      "red": {
+        "name": "Shane Collins",
+        "odds": 1.482
+      },
+      "blue": {
+        "name": "Otari Tanzilovi",
+        "odds": 2.712
+      }
+    }
+  ]
+}

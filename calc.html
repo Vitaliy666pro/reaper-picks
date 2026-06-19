@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Parlay calculator</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root{
+    --bg: var(--tg-theme-bg-color, #0f0f0f);
+    --card: var(--tg-theme-secondary-bg-color, #1c1c1e);
+    --text: var(--tg-theme-text-color, #fff);
+    --hint: var(--tg-theme-hint-color, #8a8a8e);
+    --accent: var(--tg-theme-button-color, #2ea043);
+    --red:#e24b4a; --blue:#378add;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+    /* leave room for the fixed result bar + iOS edge-swipe margins */
+    padding:12px 16px calc(132px + env(safe-area-inset-bottom));}
+  h1{font-size:18px;font-weight:500;margin:4px 0 2px}
+  .sub{color:var(--hint);font-size:13px;margin:0 0 14px}
+  .stake{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .stake input{width:120px;background:var(--card);color:var(--text);
+    border:1px solid rgba(127,127,127,.3);border-radius:10px;padding:9px 11px;font-size:16px}
+  .stake .lbl{color:var(--hint);font-size:13px}
+  .sec{color:var(--hint);font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin:16px 0 6px}
+  .bout{background:var(--card);border-radius:14px;padding:10px 12px;margin-bottom:10px}
+  .wc{color:var(--hint);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+  .pick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .opt{border:1.5px solid transparent;border-radius:10px;padding:9px 8px;text-align:center;
+    background:rgba(127,127,127,.12);cursor:pointer;font-size:14px;line-height:1.25;user-select:none}
+  .opt .od{display:block;color:var(--hint);font-size:12px;margin-top:2px}
+  .opt.sel-red{border-color:var(--red);background:rgba(226,75,74,.16)}
+  .opt.sel-blue{border-color:var(--blue);background:rgba(55,138,221,.16)}
+  #bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);
+    border-top:1px solid rgba(127,127,127,.25);
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));}
+  #bar .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  #bar .meta{color:var(--hint);font-size:13px}
+  #bar .big{font-size:22px;font-weight:600}
+  #bar .profit{color:var(--hint);font-size:14px}
+  #note{color:var(--hint);font-size:11px;line-height:1.5;margin-top:6px}
+  #clear{background:none;border:none;color:var(--hint);font-size:12px;padding:0;cursor:pointer}
+</style>
+</head>
+<body>
+<h1>Parlay calculator</h1>
+<p class="sub" id="sub">Pick a fighter in any bouts · combined odds × stake</p>
+
+<div class="stake">
+  <span class="lbl">Stake</span>
+  <input id="stake" type="number" min="1" step="1" value="10" inputmode="decimal">
+  <button id="clear">clear all</button>
+</div>
+
+<div id="list"></div>
+
+<div id="bar">
+  <div class="row">
+    <span class="meta"><span id="legs">0</span> legs · combined <span id="combo">—</span></span>
+    <span class="profit">profit <span id="profit">—</span></span>
+  </div>
+  <div class="row"><span class="big" id="ret">pick a fighter to start</span></div>
+  <div id="note">Parlay: every pick must win. Each leg multiplies the bookmaker margin — more legs = higher variance and lower expected value than singles.</div>
+</div>
+
+<script>
+const tg = window.Telegram && window.Telegram.WebApp;
+const DEMO = {name:"Demo card",date:"",bouts:[
+  {id:"red_blue_1",order:1,weight_class:"Lightweight",main_card:true,
+   red:{name:"Red One",odds:1.80},blue:{name:"Blue One",odds:2.00}}
+]};
+const state = {};   // bout_id -> "red" | "blue" | null
+let CARD = null;
+
+function odSpan(f){ return f.odds!=null ? '<span class="od">odds '+(+f.odds).toFixed(2)+'</span>' : '<span class="od">no odds</span>'; }
+
+function render(card){
+  CARD = card;
+  document.getElementById("sub").textContent = card.name + (card.date ? " · "+card.date : "");
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  const bouts = card.bouts.slice().sort((a,b)=>a.order-b.order);
+  let lastSec = null;
+  bouts.forEach(b=>{
+    state[b.id] = null;
+    const sec = (b.main_card === false) ? "Prelims" : "Main card";
+    if (sec !== lastSec){ lastSec = sec;
+      const h = document.createElement("div"); h.className = "sec"; h.textContent = sec; list.appendChild(h); }
+    const el = document.createElement("div"); el.className = "bout";
+    el.innerHTML =
+      '<div class="wc">'+(b.weight_class||"")+'</div>'+
+      '<div class="pick">'+
+        '<div class="opt" data-side="red">'+b.red.name+odSpan(b.red)+'</div>'+
+        '<div class="opt" data-side="blue">'+b.blue.name+odSpan(b.blue)+'</div>'+
+      '</div>';
+    const opts = el.querySelectorAll(".opt");
+    opts.forEach(o=>o.addEventListener("click",()=>{
+      const side = o.dataset.side;
+      state[b.id] = (state[b.id] === side) ? null : side;   // tap again to deselect
+      opts.forEach(x=>x.classList.remove("sel-red","sel-blue"));
+      if (state[b.id]) o.classList.add(state[b.id]==="red" ? "sel-red" : "sel-blue");
+      calc();
+    }));
+    list.appendChild(el);
+  });
+}
+
+function calc(){
+  const stake = Math.max(0, parseFloat(document.getElementById("stake").value) || 0);
+  let combo = 1, n = 0;
+  CARD.bouts.forEach(b=>{
+    const s = state[b.id];
+    if (s){ const f = (s==="red") ? b.red : b.blue; if (f.odds != null){ combo *= f.odds; n++; } }
+  });
+  const ret = n ? stake*combo : 0;
+  document.getElementById("legs").textContent = n;
+  document.getElementById("combo").textContent = n ? combo.toFixed(2) : "—";
+  document.getElementById("profit").textContent = n ? "+"+(ret-stake>0?ret-stake:0).toFixed(2) : "—";
+  document.getElementById("ret").textContent = n ? (stake+" → "+ret.toFixed(2)) : "pick a fighter to start";
+}
+
+document.getElementById("stake").addEventListener("input", calc);
+document.getElementById("clear").addEventListener("click", ()=>{
+  Object.keys(state).forEach(k=>state[k]=null);
+  document.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel-red","sel-blue"));
+  calc();
+});
+
+async function boot(){
+  if (tg){ tg.ready(); tg.expand(); if (tg.disableVerticalSwipes) tg.disableVerticalSwipes(); }
+  let card;
+  try { card = await (await fetch("./calc_card.json",{cache:"no-store"})).json(); }
+  catch(e){ card = DEMO; }
+  render(card); calc();
+}
+boot();
+</script>
+</body>
+</html>
