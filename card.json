@@ -1,26 +1,76 @@
 {
-  "name": "UFC 999",
-  "date": "2026-04-04",
+  "name": "UFC Freedom 250",
+  "date": "2026-06-15",
   "bouts": [
-    {"id": "topuria_oliveira_1", "order": 1, "weight_class": "Lightweight",
-     "red": {"name": "Ilia Topuria", "record": "16-0-0"},
-     "blue": {"name": "Charles Oliveira", "record": "35-10-0"},
-     "model_prob_red": 0.71},
-    {"id": "pereira_ankalaev_2", "order": 2, "weight_class": "Light Heavyweight",
-     "red": {"name": "Alex Pereira", "record": "12-3-0"},
-     "blue": {"name": "Magomed Ankalaev", "record": "20-1-1"},
-     "model_prob_red": 0.46},
-    {"id": "o'malley_dvalishvili_3", "order": 3, "weight_class": "Bantamweight",
-     "red": {"name": "Sean O'Malley", "record": "18-2-0"},
-     "blue": {"name": "Merab Dvalishvili", "record": "18-4-0"},
-     "model_prob_red": 0.38},
-    {"id": "weili_suarez_4", "order": 4, "weight_class": "Women's Strawweight",
-     "red": {"name": "Zhang Weili", "record": "25-3-0"},
-     "blue": {"name": "Tatiana Suarez", "record": "10-0-0"},
-     "model_prob_red": 0.55},
-    {"id": "strickland_imavov_5", "order": 5, "weight_class": "Middleweight",
-     "red": {"name": "Sean Strickland", "record": "29-6-0"},
-     "blue": {"name": "Nassourdine Imavov", "record": "15-4-0"},
-     "model_prob_red": 0.52}
+    {
+      "id": "gaethje_topuria_1",
+      "order": 1,
+      "weight_class": "Lightweight",
+      "red": {
+        "name": "Justin Gaethje",
+        "record": ""
+      },
+      "blue": {
+        "name": "Ilia Topuria",
+        "record": ""
+      },
+      "model_prob_red": 0.45
+    },
+    {
+      "id": "gane_pereira_2",
+      "order": 2,
+      "weight_class": "Heavyweight",
+      "red": {
+        "name": "Ciryl Gane",
+        "record": ""
+      },
+      "blue": {
+        "name": "Alex Pereira",
+        "record": ""
+      },
+      "model_prob_red": 0.48
+    },
+    {
+      "id": "zahabi_o'malley_3",
+      "order": 3,
+      "weight_class": "Bantamweight",
+      "red": {
+        "name": "Aiemann Zahabi",
+        "record": ""
+      },
+      "blue": {
+        "name": "Sean O'Malley",
+        "record": ""
+      },
+      "model_prob_red": 0.35
+    },
+    {
+      "id": "lewis_hokit_4",
+      "order": 4,
+      "weight_class": "Heavyweight",
+      "red": {
+        "name": "Derrick Lewis",
+        "record": ""
+      },
+      "blue": {
+        "name": "Josh Hokit",
+        "record": ""
+      },
+      "model_prob_red": 0.55
+    },
+    {
+      "id": "chandler_ruffy_5",
+      "order": 5,
+      "weight_class": "Lightweight",
+      "red": {
+        "name": "Michael Chandler",
+        "record": ""
+      },
+      "blue": {
+        "name": "Mauricio Ruffy",
+        "record": ""
+      },
+      "model_prob_red": 0.4
+    }
   ]
 }
