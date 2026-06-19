@@ -109,8 +109,12 @@ function refresh(){
 document.getElementById("submit").addEventListener("click",()=>{
   const payload = Object.keys(state).map(id=>({b:id,w:state[id].winner,c:state[id].conf}));
   const json = JSON.stringify(payload);
-  if (tg && tg.sendData){ tg.sendData(json); }      // -> web_app_data on the bot
-  else { alert("Превью вне Telegram. Payload:\n"+json); }
+  if (tg && tg.sendData){
+    // submit IS an intentional close — drop the "unsaved changes" guard first, else
+    // enableClosingConfirmation() pops a Warning when sendData() closes the app.
+    if (tg.disableClosingConfirmation) tg.disableClosingConfirmation();
+    tg.sendData(json);                               // -> web_app_data on the bot
+  } else { alert("Превью вне Telegram. Payload:\n"+json); }
 });
 
 async function boot(){
