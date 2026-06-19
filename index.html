@@ -64,6 +64,10 @@ function favHint(b){
   return "🤖 модель: " + who.split(" ").pop() + " " + Math.round(Math.max(p,1-p)*100) + "%";
 }
 
+function oddsSub(f){   // decimal market odds under a fighter, if present
+  return (f && f.odds != null) ? '<span class="rec">кф '+(+f.odds).toFixed(2)+'</span>' : '';
+}
+
 function render(card){
   document.getElementById("title").textContent = card.name;
   const list = document.getElementById("list");
@@ -75,8 +79,8 @@ function render(card){
     el.innerHTML =
       '<div class="wc">'+(b.weight_class||"")+'</div>'+
       '<div class="pick">'+
-        '<div class="opt" data-side="red">'+b.red.name+'</div>'+
-        '<div class="opt" data-side="blue">'+b.blue.name+'</div>'+
+        '<div class="opt" data-side="red">'+b.red.name+oddsSub(b.red)+'</div>'+
+        '<div class="opt" data-side="blue">'+b.blue.name+oddsSub(b.blue)+'</div>'+
       '</div>'+
       '<div class="conf">'+
         '<span class="lbl">Уверен на</span>'+

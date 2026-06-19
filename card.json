@@ -8,11 +8,13 @@
       "weight_class": "Flyweight",
       "red": {
         "name": "Manel Kape",
-        "record": "22-7-0"
+        "record": "22-7-0",
+        "odds": 1.63
       },
       "blue": {
         "name": "Kyoji Horiguchi",
-        "record": "36-5-0"
+        "record": "36-5-0",
+        "odds": 2.328
       },
       "model_prob_red": 0.4915
     },
@@ -22,11 +24,13 @@
       "weight_class": "Light Heavyweight",
       "red": {
         "name": "Ion Cutelaba",
-        "record": "20-11-1"
+        "record": "20-11-1",
+        "odds": 3.507
       },
       "blue": {
         "name": "Navajo Stirling",
-        "record": "9-0-0"
+        "record": "9-0-0",
+        "odds": 1.316
       },
       "model_prob_red": 0.3354
     },
@@ -36,11 +40,13 @@
       "weight_class": "Featherweight",
       "red": {
         "name": "Hyder Amil",
-        "record": "11-2-0"
+        "record": "11-2-0",
+        "odds": 2.514
       },
       "blue": {
         "name": "Christian Rodriguez",
-        "record": "12-4-0"
+        "record": "12-4-0",
+        "odds": 1.547
       },
       "model_prob_red": 0.34
     },
@@ -50,11 +56,13 @@
       "weight_class": "Featherweight",
       "red": {
         "name": "Melsik Baghdasaryan",
-        "record": "8-3-0"
+        "record": "8-3-0",
+        "odds": 3.497
       },
       "blue": {
         "name": "Murtazali Magomedov",
-        "record": "10-0-0"
+        "record": "10-0-0",
+        "odds": 1.32
       },
       "model_prob_red": 0.887
     },
@@ -64,11 +72,13 @@
       "weight_class": "Bantamweight",
       "red": {
         "name": "Vinicius Oliveira",
-        "record": "23-4-0"
+        "record": "23-4-0",
+        "odds": 1.335
       },
       "blue": {
         "name": "Andre Fili",
-        "record": "25-13-0"
+        "record": "25-13-0",
+        "odds": 3.425
       },
       "model_prob_red": 0.5723
     }
