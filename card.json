@@ -1,76 +1,76 @@
 {
-  "name": "UFC Freedom 250",
-  "date": "2026-06-15",
+  "name": "UFC Fight Night: Kape vs. Horiguchi",
+  "date": "2026-06-20",
   "bouts": [
     {
-      "id": "gaethje_topuria_1",
+      "id": "kape_horiguchi_1",
       "order": 1,
-      "weight_class": "Lightweight",
+      "weight_class": "Flyweight",
       "red": {
-        "name": "Justin Gaethje",
-        "record": ""
+        "name": "Manel Kape",
+        "record": "22-7-0"
       },
       "blue": {
-        "name": "Ilia Topuria",
-        "record": ""
+        "name": "Kyoji Horiguchi",
+        "record": "36-5-0"
       },
-      "model_prob_red": 0.45
+      "model_prob_red": 0.4915
     },
     {
-      "id": "gane_pereira_2",
+      "id": "cutelaba_stirling_2",
       "order": 2,
-      "weight_class": "Heavyweight",
+      "weight_class": "Light Heavyweight",
       "red": {
-        "name": "Ciryl Gane",
-        "record": ""
+        "name": "Ion Cutelaba",
+        "record": "20-11-1"
       },
       "blue": {
-        "name": "Alex Pereira",
-        "record": ""
+        "name": "Navajo Stirling",
+        "record": "9-0-0"
       },
-      "model_prob_red": 0.48
+      "model_prob_red": 0.3354
     },
     {
-      "id": "zahabi_o'malley_3",
+      "id": "amil_rodriguez_3",
       "order": 3,
+      "weight_class": "Featherweight",
+      "red": {
+        "name": "Hyder Amil",
+        "record": "11-2-0"
+      },
+      "blue": {
+        "name": "Christian Rodriguez",
+        "record": "12-4-0"
+      },
+      "model_prob_red": 0.34
+    },
+    {
+      "id": "baghdasaryan_magomedov_4",
+      "order": 4,
+      "weight_class": "Featherweight",
+      "red": {
+        "name": "Melsik Baghdasaryan",
+        "record": "8-3-0"
+      },
+      "blue": {
+        "name": "Murtazali Magomedov",
+        "record": "10-0-0"
+      },
+      "model_prob_red": 0.887
+    },
+    {
+      "id": "oliveira_fili_5",
+      "order": 5,
       "weight_class": "Bantamweight",
       "red": {
-        "name": "Aiemann Zahabi",
-        "record": ""
+        "name": "Vinicius Oliveira",
+        "record": "23-4-0"
       },
       "blue": {
-        "name": "Sean O'Malley",
-        "record": ""
+        "name": "Andre Fili",
+        "record": "25-13-0"
       },
-      "model_prob_red": 0.35
-    },
-    {
-      "id": "lewis_hokit_4",
-      "order": 4,
-      "weight_class": "Heavyweight",
-      "red": {
-        "name": "Derrick Lewis",
-        "record": ""
-      },
-      "blue": {
-        "name": "Josh Hokit",
-        "record": ""
-      },
-      "model_prob_red": 0.55
-    },
-    {
-      "id": "chandler_ruffy_5",
-      "order": 5,
-      "weight_class": "Lightweight",
-      "red": {
-        "name": "Michael Chandler",
-        "record": ""
-      },
-      "blue": {
-        "name": "Mauricio Ruffy",
-        "record": ""
-      },
-      "model_prob_red": 0.4
+      "model_prob_red": 0.5723
     }
   ]
 }
