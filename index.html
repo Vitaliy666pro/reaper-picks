@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Прогноз на кард</title>
+<title>Predict the card</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   :root{
@@ -42,10 +42,10 @@
 </style>
 </head>
 <body>
-<h1 id="title">Прогноз на кард</h1>
-<p class="sub" id="sub">Выбери победителя и сдвинь слайдер уверенности</p>
+<h1 id="title">Predict the card</h1>
+<p class="sub" id="sub">Pick a winner and set your confidence</p>
 <div id="list"></div>
-<button id="submit" disabled>Сначала выбери победителей</button>
+<button id="submit" disabled>Pick all winners first</button>
 
 <script>
 const tg = window.Telegram && window.Telegram.WebApp;
@@ -61,11 +61,11 @@ function favHint(b){
   if (p == null) return "";
   const side = p >= .5 ? "red" : "blue";
   const who = side === "red" ? b.red.name : b.blue.name;
-  return "🤖 модель: " + who.split(" ").pop() + " " + Math.round(Math.max(p,1-p)*100) + "%";
+  return "🤖 model: " + who.split(" ").pop() + " " + Math.round(Math.max(p,1-p)*100) + "%";
 }
 
 function oddsSub(f){   // decimal market odds under a fighter, if present
-  return (f && f.odds != null) ? '<span class="rec">кф '+(+f.odds).toFixed(2)+'</span>' : '';
+  return (f && f.odds != null) ? '<span class="rec">odds '+(+f.odds).toFixed(2)+'</span>' : '';
 }
 
 function render(card){
@@ -83,11 +83,11 @@ function render(card){
         '<div class="opt" data-side="blue">'+b.blue.name+oddsSub(b.blue)+'</div>'+
       '</div>'+
       '<div class="conf">'+
-        '<span class="lbl">Уверен на</span>'+
+        '<span class="lbl">Confidence</span>'+
         '<input type="range" min="50" max="95" step="5" value="65">'+
         '<span class="val">65%</span>'+
       '</div>'+
-      '<button class="hintbtn">показать прогноз модели</button>';
+      '<button class="hintbtn">show model\'s pick</button>';
     const opts = el.querySelectorAll(".opt");
     opts.forEach(o=>o.addEventListener("click",()=>{
       state[b.id].winner = o.dataset.side;
@@ -107,7 +107,7 @@ function refresh(){
   const ready = Object.values(state).every(s=>s.winner);
   const btn = document.getElementById("submit");
   btn.disabled = !ready;
-  btn.textContent = ready ? "Отправить прогноз" : "Сначала выбери победителей";
+  btn.textContent = ready ? "Submit prediction" : "Pick all winners first";
 }
 
 document.getElementById("submit").addEventListener("click",()=>{
@@ -118,7 +118,7 @@ document.getElementById("submit").addEventListener("click",()=>{
     // enableClosingConfirmation() pops a Warning when sendData() closes the app.
     if (tg.disableClosingConfirmation) tg.disableClosingConfirmation();
     tg.sendData(json);                               // -> web_app_data on the bot
-  } else { alert("Превью вне Telegram. Payload:\n"+json); }
+  } else { alert("Preview outside Telegram. Payload:\n"+json); }
 });
 
 async function boot(){
