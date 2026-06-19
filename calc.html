@@ -110,15 +110,18 @@ function render(card){
 
 function calc(){
   const stake = Math.max(0, parseFloat(document.getElementById("stake").value) || 0);
+  const r2 = x => Math.round(x*100)/100;   // odds display at 2dp -> compute at 2dp so the math is hand-checkable
   let combo = 1, n = 0;
   CARD.bouts.forEach(b=>{
     const s = state[b.id];
-    if (s){ const f = (s==="red") ? b.red : b.blue; if (f.odds != null){ combo *= f.odds; n++; } }
+    if (s){ const f = (s==="red") ? b.red : b.blue; if (f.odds != null){ combo *= r2(f.odds); n++; } }
   });
-  const ret = n ? stake*combo : 0;
+  combo = r2(combo);
+  const ret = n ? r2(stake*combo) : 0;
+  const profit = (ret-stake > 0) ? r2(ret-stake) : 0;
   document.getElementById("legs").textContent = n;
   document.getElementById("combo").textContent = n ? combo.toFixed(2) : "—";
-  document.getElementById("profit").textContent = n ? "+"+(ret-stake>0?ret-stake:0).toFixed(2) : "—";
+  document.getElementById("profit").textContent = n ? "+"+profit.toFixed(2) : "—";
   document.getElementById("ret").textContent = n ? (stake+" → "+ret.toFixed(2)) : "pick a fighter to start";
 }
 
