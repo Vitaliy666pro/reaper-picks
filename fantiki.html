@@ -68,7 +68,7 @@
 
 <script>
 const tg = window.Telegram && window.Telegram.WebApp;
-const START = 100, MIN_STAKE = 10;
+const START = 100, MIN_STAKE = 1;
 const DEMO = {name:"Demo",date:"",locked_ids:[],bouts:[
   {id:"a_b_1",order:1,weight_class:"Lightweight",main_card:true,model_prob_red:0.6,
    red:{name:"Red One",odds:1.8},blue:{name:"Blue One",odds:2.0}}]};
@@ -100,7 +100,7 @@ function render(card){
         '<div class="opt" data-side="blue">'+b.blue.name+odTxt(b.blue)+'</div>'+
       '</div>'+
       '<div class="stakerow" style="display:none"><span class="lbl">stake</span>'+
-        '<input type="number" min="'+MIN_STAKE+'" step="10" value="20" inputmode="numeric">'+
+        '<input type="number" min="'+MIN_STAKE+'" step="1" value="20" inputmode="numeric">'+
         '<span class="mh">'+mh+'</span></div>';
     list.appendChild(el);
     if (locked) return;   // no listeners — bout frozen
