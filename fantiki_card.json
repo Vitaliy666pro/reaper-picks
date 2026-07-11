@@ -1,185 +1,215 @@
 {
-  "name": "UFC Fight Night: Kape vs. Horiguchi",
-  "date": "2026-06-20",
+  "name": "UFC 329: McGregor vs. Holloway 2",
+  "date": "2026-07-11",
   "bouts": [
     {
-      "id": "kape_horiguchi_1",
+      "id": "mcgregor_holloway_1",
       "order": 1,
-      "weight_class": "Flyweight",
+      "weight_class": "Lightweight",
       "main_card": true,
-      "model_prob_red": 0.4915,
+      "model_prob_red": 0.5429,
       "red": {
-        "name": "Manel Kape",
-        "odds": 1.63
+        "name": "Conor McGregor",
+        "odds": 3.129
       },
       "blue": {
-        "name": "Kyoji Horiguchi",
-        "odds": 2.328
+        "name": "Max Holloway",
+        "odds": 1.386
       }
     },
     {
-      "id": "cutelaba_stirling_2",
+      "id": "denis_pimblett_2",
       "order": 2,
-      "weight_class": "Light Heavyweight",
+      "weight_class": "Lightweight",
       "main_card": true,
-      "model_prob_red": 0.3354,
+      "model_prob_red": 0.6939,
       "red": {
-        "name": "Ion Cutelaba",
-        "odds": 3.507
+        "name": "Benoit Saint Denis",
+        "odds": 1.726
       },
       "blue": {
-        "name": "Navajo Stirling",
-        "odds": 1.316
+        "name": "Paddy Pimblett",
+        "odds": 2.15
       }
     },
     {
-      "id": "amil_rodriguez_3",
+      "id": "sandhagen_bautista_3",
       "order": 3,
-      "weight_class": "Featherweight",
-      "main_card": true,
-      "model_prob_red": 0.34,
-      "red": {
-        "name": "Hyder Amil",
-        "odds": 2.514
-      },
-      "blue": {
-        "name": "Christian Rodriguez",
-        "odds": 1.547
-      }
-    },
-    {
-      "id": "baghdasaryan_magomedov_4",
-      "order": 4,
-      "weight_class": "Featherweight",
-      "main_card": true,
-      "model_prob_red": 0.887,
-      "red": {
-        "name": "Melsik Baghdasaryan",
-        "odds": 3.497
-      },
-      "blue": {
-        "name": "Murtazali Magomedov",
-        "odds": 1.32
-      }
-    },
-    {
-      "id": "oliveira_fili_5",
-      "order": 5,
       "weight_class": "Bantamweight",
       "main_card": true,
-      "model_prob_red": 0.5723,
+      "model_prob_red": 0.5429,
       "red": {
-        "name": "Vinicius Oliveira",
-        "odds": 1.335
+        "name": "Cory Sandhagen",
+        "odds": 1.687
       },
       "blue": {
-        "name": "Andre Fili",
-        "odds": 3.425
+        "name": "Mario Bautista",
+        "odds": 2.215
       }
     },
     {
-      "id": "lima_borjas_6",
-      "order": 6,
+      "id": "royval_kavanagh_4",
+      "order": 4,
       "weight_class": "Flyweight",
-      "main_card": false,
-      "model_prob_red": 0.587,
+      "main_card": true,
+      "model_prob_red": 0.4296,
       "red": {
-        "name": "Andre Lima",
-        "odds": 1.155
+        "name": "Brandon Royval",
+        "odds": 2.794
       },
       "blue": {
-        "name": "Kevin Borjas",
-        "odds": 5.563
+        "name": "Lone'er Kavanagh",
+        "odds": 1.457
       }
     },
     {
-      "id": "mesquita_mullins_7",
+      "id": "green_mckinney_5",
+      "order": 5,
+      "weight_class": "Lightweight",
+      "main_card": true,
+      "model_prob_red": 0.5429,
+      "red": {
+        "name": "King Green",
+        "odds": 1.907
+      },
+      "blue": {
+        "name": "Terrance McKinney",
+        "odds": 1.936
+      }
+    },
+    {
+      "id": "krylov_whittaker_6",
+      "order": 6,
+      "weight_class": "Light Heavyweight",
+      "main_card": false,
+      "model_prob_red": 0.5429,
+      "red": {
+        "name": "Nikita Krylov",
+        "odds": 2.006
+      },
+      "blue": {
+        "name": "Robert Whittaker",
+        "odds": 1.823
+      }
+    },
+    {
+      "id": "steveson_ellison_7",
       "order": 7,
-      "weight_class": "Women's Bantamweight",
+      "weight_class": "Heavyweight",
       "main_card": false,
-      "model_prob_red": 0.5995,
+      "model_prob_red": null,
       "red": {
-        "name": "Bia Mesquita",
-        "odds": 1.166
+        "name": "Gable Steveson",
+        "odds": 1.06
       },
       "blue": {
-        "name": "Melissa Mullins",
-        "odds": 5.293
+        "name": "Elisha Ellison",
+        "odds": 9.891
       }
     },
     {
-      "id": "nascimento_raposo_8",
+      "id": "garbrandt_yanez_8",
       "order": 8,
+      "weight_class": "Bantamweight",
+      "main_card": false,
+      "model_prob_red": 0.4717,
+      "red": {
+        "name": "Cody Garbrandt",
+        "odds": 4.299
+      },
+      "blue": {
+        "name": "Adrian Yanez",
+        "odds": 1.23
+      }
+    },
+    {
+      "id": "riley_iii_9",
+      "order": 9,
+      "weight_class": "Featherweight",
+      "main_card": false,
+      "model_prob_red": 0.6939,
+      "red": {
+        "name": "Luke Riley",
+        "odds": 1.443
+      },
+      "blue": {
+        "name": "Kai Kamaka III",
+        "odds": 2.849
+      }
+    },
+    {
+      "id": "cortez_cong_10",
+      "order": 10,
+      "weight_class": "Women's Flyweight",
+      "main_card": false,
+      "model_prob_red": 0.6131,
+      "red": {
+        "name": "Tracy Cortez",
+        "odds": 1.99
+      },
+      "blue": {
+        "name": "Wang Cong",
+        "odds": 1.836
+      }
+    },
+    {
+      "id": "pinas_almeida_11",
+      "order": 11,
+      "weight_class": "Middleweight",
+      "main_card": false,
+      "model_prob_red": 0.8031,
+      "red": {
+        "name": "Damian Pinas",
+        "odds": 1.388
+      },
+      "blue": {
+        "name": "Cesar Almeida",
+        "odds": 3.104
+      }
+    },
+    {
+      "id": "basharat_garza_12",
+      "order": 12,
+      "weight_class": "Bantamweight",
+      "main_card": false,
+      "model_prob_red": null,
+      "red": {
+        "name": "Farid Basharat",
+        "odds": 1.149
+      },
+      "blue": {
+        "name": "John Garza",
+        "odds": 5.759
+      }
+    },
+    {
+      "id": "gandra_reese_13",
+      "order": 13,
+      "weight_class": "Middleweight",
+      "main_card": false,
+      "model_prob_red": 0.6198,
+      "red": {
+        "name": "Ryan Gandra",
+        "odds": 1.736
+      },
+      "blue": {
+        "name": "Zach Reese",
+        "odds": 2.133
+      }
+    },
+    {
+      "id": "costa_durden_14",
+      "order": 14,
       "weight_class": "Catch Weight",
       "main_card": false,
-      "model_prob_red": 0.435,
+      "model_prob_red": 0.6939,
       "red": {
-        "name": "Allan Nascimento",
-        "odds": 1.511
+        "name": "Alessandro Costa",
+        "odds": 1.44
       },
       "blue": {
-        "name": "Mitch Raposo",
-        "odds": 2.619
-      }
-    },
-    {
-      "id": "bolanos_jr._9",
-      "order": 9,
-      "weight_class": "Bantamweight",
-      "main_card": false,
-      "model_prob_red": 0.448,
-      "red": {
-        "name": "Gaston Bolanos",
-        "odds": 4.25
-      },
-      "blue": {
-        "name": "Michael Aswell Jr.",
-        "odds": 1.24
-      }
-    },
-    {
-      "id": "shahbazyan_chokheli_10",
-      "order": 10,
-      "weight_class": "",
-      "main_card": false,
-      "model_prob_red": 0.6613,
-      "red": {
-        "name": "Leon Shahbazyan",
-        "odds": 3.912
-      },
-      "blue": {
-        "name": "Levan Chokheli",
-        "odds": 1.271
-      }
-    },
-    {
-      "id": "rosa_santos_11",
-      "order": 11,
-      "weight_class": "Women's Bantamweight",
-      "main_card": false,
-      "model_prob_red": 0.4198,
-      "red": {
-        "name": "Karol Rosa",
-        "odds": 1.806
-      },
-      "blue": {
-        "name": "Luana Santos",
-        "odds": 2.028
-      }
-    },
-    {
-      "id": "collins_tanzilovi_12",
-      "order": 12,
-      "weight_class": "",
-      "main_card": false,
-      "model_prob_red": 0.6455,
-      "red": {
-        "name": "Shane Collins",
-        "odds": 1.482
-      },
-      "blue": {
-        "name": "Otari Tanzilovi",
-        "odds": 2.712
+        "name": "Cody Durden",
+        "odds": 2.862
       }
     }
   ],
