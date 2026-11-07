@@ -1,215 +1,215 @@
 {
-  "name": "UFC 329: McGregor vs. Holloway 2",
-  "date": "2026-07-11",
+  "name": "UFC Fight Night: Cortes Acosta vs. Walker",
+  "date": "2026-11-07",
   "bouts": [
     {
-      "id": "mcgregor_holloway_1",
+      "id": "acosta_walker_1",
       "order": 1,
-      "weight_class": "Lightweight",
+      "weight_class": "Heavyweight",
       "main_card": true,
-      "model_prob_red": 0.5429,
+      "model_prob_red": 0.6348,
       "red": {
-        "name": "Conor McGregor",
-        "odds": 3.129
+        "name": "Waldo Cortes Acosta",
+        "odds": 1.492
       },
       "blue": {
-        "name": "Max Holloway",
-        "odds": 1.386
+        "name": "Johnny Walker",
+        "odds": 2.667
       }
     },
     {
-      "id": "denis_pimblett_2",
+      "id": "suarez_jandiroba_2",
       "order": 2,
-      "weight_class": "Lightweight",
+      "weight_class": "Women's Strawweight",
       "main_card": true,
-      "model_prob_red": 0.6939,
+      "model_prob_red": 0.7933,
       "red": {
-        "name": "Benoit Saint Denis",
-        "odds": 1.726
+        "name": "Tatiana Suarez",
+        "odds": 1.507
       },
       "blue": {
-        "name": "Paddy Pimblett",
-        "odds": 2.15
+        "name": "Virna Jandiroba",
+        "odds": 2.629
       }
     },
     {
-      "id": "sandhagen_bautista_3",
+      "id": "grant_smith_3",
       "order": 3,
       "weight_class": "Bantamweight",
       "main_card": true,
-      "model_prob_red": 0.5429,
+      "model_prob_red": 0.2353,
       "red": {
-        "name": "Cory Sandhagen",
-        "odds": 1.687
+        "name": "Davey Grant",
+        "odds": 3.094
       },
       "blue": {
-        "name": "Mario Bautista",
-        "odds": 2.215
+        "name": "Elijah Smith",
+        "odds": 1.383
       }
     },
     {
-      "id": "royval_kavanagh_4",
+      "id": "ko_turman_4",
       "order": 4,
-      "weight_class": "Flyweight",
+      "weight_class": "Welterweight",
       "main_card": true,
-      "model_prob_red": 0.4296,
+      "model_prob_red": 0.6489,
       "red": {
-        "name": "Brandon Royval",
-        "odds": 2.794
+        "name": "Seokhyeon Ko",
+        "odds": 1.138
       },
       "blue": {
-        "name": "Lone'er Kavanagh",
-        "odds": 1.457
+        "name": "Wellington Turman",
+        "odds": 5.979
       }
     },
     {
-      "id": "green_mckinney_5",
+      "id": "elekana_fernando_5",
       "order": 5,
-      "weight_class": "Lightweight",
-      "main_card": true,
-      "model_prob_red": 0.5429,
-      "red": {
-        "name": "King Green",
-        "odds": 1.907
-      },
-      "blue": {
-        "name": "Terrance McKinney",
-        "odds": 1.936
-      }
-    },
-    {
-      "id": "krylov_whittaker_6",
-      "order": 6,
       "weight_class": "Light Heavyweight",
-      "main_card": false,
-      "model_prob_red": 0.5429,
+      "main_card": true,
+      "model_prob_red": 0.5188,
       "red": {
-        "name": "Nikita Krylov",
-        "odds": 2.006
+        "name": "Billy Elekana",
+        "odds": 3.345
       },
       "blue": {
-        "name": "Robert Whittaker",
-        "odds": 1.823
+        "name": "Lucas Fernando",
+        "odds": 1.342
       }
     },
     {
-      "id": "steveson_ellison_7",
+      "id": "kondratavicius_petroski_6",
+      "order": 6,
+      "weight_class": "Middleweight",
+      "main_card": false,
+      "model_prob_red": 0.8118,
+      "red": {
+        "name": "Mantas Kondratavicius",
+        "odds": 1.325
+      },
+      "blue": {
+        "name": "Andre Petroski",
+        "odds": 3.461
+      }
+    },
+    {
+      "id": "lorenco_petersen_7",
       "order": 7,
       "weight_class": "Heavyweight",
       "main_card": false,
       "model_prob_red": null,
       "red": {
-        "name": "Gable Steveson",
-        "odds": 1.06
+        "name": "Gabriel Lorenco",
+        "odds": 2.321
       },
       "blue": {
-        "name": "Elisha Ellison",
-        "odds": 9.891
+        "name": "Thomas Petersen",
+        "odds": 1.631
       }
     },
     {
-      "id": "garbrandt_yanez_8",
+      "id": "silva_fernandes_8",
       "order": 8,
-      "weight_class": "Bantamweight",
-      "main_card": false,
-      "model_prob_red": 0.4717,
-      "red": {
-        "name": "Cody Garbrandt",
-        "odds": 4.299
-      },
-      "blue": {
-        "name": "Adrian Yanez",
-        "odds": 1.23
-      }
-    },
-    {
-      "id": "riley_iii_9",
-      "order": 9,
-      "weight_class": "Featherweight",
-      "main_card": false,
-      "model_prob_red": 0.6939,
-      "red": {
-        "name": "Luke Riley",
-        "odds": 1.443
-      },
-      "blue": {
-        "name": "Kai Kamaka III",
-        "odds": 2.849
-      }
-    },
-    {
-      "id": "cortez_cong_10",
-      "order": 10,
       "weight_class": "Women's Flyweight",
       "main_card": false,
-      "model_prob_red": 0.6131,
+      "model_prob_red": 0.6713,
       "red": {
-        "name": "Tracy Cortez",
-        "odds": 1.99
+        "name": "Karine Silva",
+        "odds": 1.469
       },
       "blue": {
-        "name": "Wang Cong",
-        "odds": 1.836
+        "name": "Gabriella Fernandes",
+        "odds": 2.742
       }
     },
     {
-      "id": "pinas_almeida_11",
-      "order": 11,
-      "weight_class": "Middleweight",
-      "main_card": false,
-      "model_prob_red": 0.8031,
-      "red": {
-        "name": "Damian Pinas",
-        "odds": 1.388
-      },
-      "blue": {
-        "name": "Cesar Almeida",
-        "odds": 3.104
-      }
-    },
-    {
-      "id": "basharat_garza_12",
-      "order": 12,
-      "weight_class": "Bantamweight",
+      "id": "raposo_degli_9",
+      "order": 9,
+      "weight_class": "Flyweight",
       "main_card": false,
       "model_prob_red": null,
       "red": {
-        "name": "Farid Basharat",
-        "odds": 1.149
+        "name": "Mitch Raposo",
+        "odds": 2.824
       },
       "blue": {
-        "name": "John Garza",
-        "odds": 5.759
+        "name": "Marcos Degli",
+        "odds": 1.445
       }
     },
     {
-      "id": "gandra_reese_13",
+      "id": "delano_magomedov_10",
+      "order": 10,
+      "weight_class": "Featherweight",
+      "main_card": false,
+      "model_prob_red": 0.4728,
+      "red": {
+        "name": "Jose Delano",
+        "odds": 1.973
+      },
+      "blue": {
+        "name": "Murtazali Magomedov",
+        "odds": 1.847
+      }
+    },
+    {
+      "id": "nakamura_schmid_11",
+      "order": 11,
+      "weight_class": "Featherweight",
+      "main_card": false,
+      "model_prob_red": 0.5949,
+      "red": {
+        "name": "Keiichiro Nakamura",
+        "odds": 1.286
+      },
+      "blue": {
+        "name": "Ollie Schmid",
+        "odds": 3.745
+      }
+    },
+    {
+      "id": "bashi_brennan_12",
+      "order": 12,
+      "weight_class": "Featherweight",
+      "main_card": false,
+      "model_prob_red": 0.6779,
+      "red": {
+        "name": "Austin Bashi",
+        "odds": null
+      },
+      "blue": {
+        "name": "Lucas Brennan",
+        "odds": null
+      }
+    },
+    {
+      "id": "cachoeira_milosevic_13",
       "order": 13,
-      "weight_class": "Middleweight",
+      "weight_class": "Women's Bantamweight",
       "main_card": false,
-      "model_prob_red": 0.6198,
+      "model_prob_red": 0.273,
       "red": {
-        "name": "Ryan Gandra",
-        "odds": 1.736
+        "name": "Priscila Cachoeira",
+        "odds": 4.482
       },
       "blue": {
-        "name": "Zach Reese",
-        "odds": 2.133
+        "name": "Nina Milosevic",
+        "odds": 1.212
       }
     },
     {
-      "id": "costa_durden_14",
+      "id": "parsons_souza_14",
       "order": 14,
-      "weight_class": "Catch Weight",
+      "weight_class": "Welterweight",
       "main_card": false,
-      "model_prob_red": 0.6939,
+      "model_prob_red": 0.4687,
       "red": {
-        "name": "Alessandro Costa",
-        "odds": 1.44
+        "name": "Jonny Parsons",
+        "odds": 2.708
       },
       "blue": {
-        "name": "Cody Durden",
-        "odds": 2.862
+        "name": "Jose Souza",
+        "odds": 1.477
       }
     }
   ],
